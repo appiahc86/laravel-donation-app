@@ -47,7 +47,7 @@
     $(function () {
          window.print();
       setTimeout(function () {
-          window.location.href = '/';
+          window.location.href = '/home';
       },10)
         // window.location.href = '/';
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 
 class DonationController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -21,15 +22,7 @@ class DonationController extends Controller
       return view('index', compact('donations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -54,27 +47,14 @@ class DonationController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Donation  $donation
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Donation $donation)
-    {
-        //
+
+    public function edit(Request $request, $id){
+        $donation = Donation::findOrFail($id);
+
+        return view('edit')->with('donation', $donation);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Donation  $donation
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Donation $donation)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -83,8 +63,10 @@ class DonationController extends Controller
      * @param  \App\Donation  $donation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Donation $donation)
+    public function update(Request $request,  $id)
     {
+        $donation = Donation::findOrFail($id);
+
         $request->validate([
             'name'=> 'required',
             'amount'=> 'numeric'
@@ -96,7 +78,7 @@ class DonationController extends Controller
         ]);
 
         Session::flash('success', 'Record Has Been Updated');
-        return redirect()->back();
+        return redirect(route('home'));
 
     }
 
@@ -106,8 +88,10 @@ class DonationController extends Controller
      * @param  \App\Donation  $donation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Donation $donation)
+    public function destroy($id)
     {
+
+       $donation = Donation::findOrFail($id);
         $donation->delete();
         Session::flash('success', 'Record Deleted');
         return redirect()->back();
