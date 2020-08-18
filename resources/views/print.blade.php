@@ -37,7 +37,7 @@
 
     </table>
 
-    <div style="font-size: 2em;">{{number_format($total, 2)}}</div>
+    <div style="font-size: 2em;"><b>Total: GH₵ {{number_format($total, 2)}}</b></div>
 
 </div>
 
